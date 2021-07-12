@@ -16,4 +16,4 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ## Design
-![alt text](https://github.com/sianna93/challenge_flutter/edit/master/create_order/assets/createOrderScreen.png)
+![Screenshot](https://github.com/sianna93/challenge_flutter/blob/master/create_order/assets/createOrderScreen.png?raw=true)
