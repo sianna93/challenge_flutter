@@ -2,11 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:muszy_app/model/song-model.dart';
+import 'package:muszy_app/pages/music-play-page.dart';
 import 'package:muszy_app/theme/app-theme.dart';
+import 'package:muszy_app/widgets/play-icon.dart';
 
 class TodayHitsList extends StatelessWidget {
 
-  List<TodayHitsModel>todayHits = [];
+  List<SongModel>todayHits = [];
 
   TodayHitsList({required this.todayHits});
 
@@ -24,7 +27,7 @@ class TodayHitsList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index){
             return Padding(
               padding:  index < todayHits.length - 1 ? EdgeInsets.only(right: 15.0) : EdgeInsets.all(0),
-              child: TodayHistsItem(todayHit: todayHits[index], todayHitColor: index % 2 != 0 ? TodayHitColor.BLUE : TodayHitColor.PINK)
+              child: TodayHistsItem(todayHits: todayHits, todayHit: todayHits[index], index: index, todayHitColor: index % 2 != 0 ? TodayHitColor.BLUE : TodayHitColor.PINK)
             );
 
           }
@@ -37,22 +40,31 @@ class TodayHitsList extends StatelessWidget {
 
 class TodayHistsItem extends StatelessWidget {
 
-  final TodayHitsModel todayHit;
+  final List<SongModel> todayHits;
+  final SongModel todayHit;
+  int index = 0;
   final TodayHitColor todayHitColor;
   double _width = 130.0;
   double _height = 130.0;
 
-  TodayHistsItem({required this.todayHit, required this.todayHitColor});
+  TodayHistsItem({required this.todayHit, required this.todayHitColor, required this.todayHits, this.index = 0});
 
   @override
   Widget build(BuildContext context) {
+
     _width = MediaQuery.of(context).size.width / 3 - 23;
     _height = _width;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        GestureDetector(
+          onTap: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MusicPlayPage(song: todayHit, songList: todayHits, index: index,))
+            );
+          },
+          child: Container(
             height: _height,
             width: _width ,
             decoration: BoxDecoration(
@@ -99,43 +111,15 @@ class TodayHistsItem extends StatelessWidget {
                 /* Play Icon */
                 Align(
                   alignment: Alignment.center,
-                  child:
-                  Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          width: 60.0,
-                          height: 60.0,
-                          child:  ClipRect(
-                            child: BackdropFilter(
-                                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                      color: Color(0xFF82858c).withOpacity(0.4),
-                                    )
-                                )
-                            ),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: CircleAvatar(
-                          radius: 15.0,
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.play_arrow, size: 24.0, color: Color(0xFF82858c),),
-                        ),
-                      )
-
-                    ],
-                  ),
+                  child: PlayIconWidget(customWidth: 50.0, customHeight: 50.0,)
                 )
 
               ],
             ),
           ) ,
+
+        ),
+
         SizedBox(height: 15.0),
         Text(this.todayHit.title, style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold), textAlign: TextAlign.start,),
         SizedBox(height: 6.0),
@@ -145,15 +129,6 @@ class TodayHistsItem extends StatelessWidget {
 
 
   }
-}
-
-class TodayHitsModel{
-  final String imagePath;
-  String imageUrl = '';
-  String title;
-  String author;
-
-  TodayHitsModel({required this.imagePath, this.imageUrl = '', required this.title, required this.author});
 }
 
 enum TodayHitColor{

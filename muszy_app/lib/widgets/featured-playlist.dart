@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:muszy_app/model/song-model.dart';
+import 'package:muszy_app/pages/music-play-page.dart';
 import 'package:muszy_app/theme/app-theme.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:muszy_app/widgets/today-hist.dart';
+
 class FeaturedPlaylistList extends StatelessWidget {
 
-  List<FeaturedPlaylistModel>featuredPlays = [];
+  List<SongModel>featuredPlays = [];
 
   FeaturedPlaylistList({required this.featuredPlays});
 
@@ -21,9 +25,17 @@ class FeaturedPlaylistList extends StatelessWidget {
           itemCount: featuredPlays.length,
           padding: EdgeInsets.all(0.0),
           itemBuilder: (BuildContext context, int index){
-            return Padding(
-              padding:  index < featuredPlays.length - 1 ? EdgeInsets.only(right: 15.0) : EdgeInsets.all(0),
-              child: FeaturedPlaylistItem(featuredPlaylist: featuredPlays[index], featuredPlaylistColor: index % 2 != 0 ? FeaturedPlaylistColor.PINK : FeaturedPlaylistColor.BLUE)
+            return GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MusicPlayPage(song: featuredPlays[index], songList: featuredPlays, index: index,))
+                  );
+                },
+                child:
+                  Padding(
+                    padding:  index < featuredPlays.length - 1 ? EdgeInsets.only(right: 15.0) : EdgeInsets.all(0),
+                    child: FeaturedPlaylistItem(featuredPlaylist: featuredPlays[index], featuredPlaylistColor: index % 2 != 0 ? FeaturedPlaylistColor.PINK : FeaturedPlaylistColor.BLUE)
+                  )
             );
 
           }
@@ -36,7 +48,7 @@ class FeaturedPlaylistList extends StatelessWidget {
 
 class FeaturedPlaylistItem extends StatelessWidget {
 
-  final FeaturedPlaylistModel featuredPlaylist;
+  final SongModel featuredPlaylist;
   final FeaturedPlaylistColor featuredPlaylistColor;
   double _width = 200.0;
   double _height = 80.0;
@@ -128,15 +140,6 @@ class FeaturedPlaylistItem extends StatelessWidget {
       ),
     );
   }
-}
-
-class FeaturedPlaylistModel{
-  final String imagePath;
-  String imageUrl = '';
-  final String title;
-  int numberSongs = 0;
-
-  FeaturedPlaylistModel({required this.imagePath, required this.title, this.imageUrl = '', this.numberSongs = 0});
 }
 
 enum FeaturedPlaylistColor{

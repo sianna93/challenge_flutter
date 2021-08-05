@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:muszy_app/model/song-model.dart';
+import 'package:muszy_app/pages/music-play-page.dart';
 import 'package:muszy_app/theme/app-theme.dart';
 
 class DailyMixList extends StatelessWidget {
 
-  List<DailyMixModel>dailies = [];
+  List<SongModel>dailies = [];
 
   DailyMixList({required this.dailies});
 
@@ -21,7 +23,14 @@ class DailyMixList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index){
             return Padding(
               padding:  index < dailies.length - 1 ? EdgeInsets.only(right: 15.0) : EdgeInsets.all(0),
-              child: DailyMixItem(dailyMix: dailies[index], dailyColor: index % 2 != 0 ? DailyColor.BLUE : DailyColor.PINK)
+              child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MusicPlayPage(song: dailies[index], songList: dailies, index: index,))
+                    );
+                  },
+                  child: DailyMixItem(dailyMix: dailies[index], dailyColor: index % 2 != 0 ? DailyColor.BLUE : DailyColor.PINK)
+              )
             );
 
           }
@@ -34,7 +43,7 @@ class DailyMixList extends StatelessWidget {
 
 class DailyMixItem extends StatelessWidget {
 
-  final DailyMixModel dailyMix;
+  final SongModel dailyMix;
   final DailyColor dailyColor;
   double _width = 250.0;
   double _height = 150.0;
@@ -92,13 +101,6 @@ class DailyMixItem extends StatelessWidget {
   }
 }
 
-class DailyMixModel{
-  final String imagePath;
-  String imageUrl = '';
-  final String title;
-
-  DailyMixModel({required this.imagePath, required this.title, this.imageUrl = ''});
-}
 
 enum DailyColor{
   PINK,

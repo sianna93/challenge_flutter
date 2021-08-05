@@ -14,3 +14,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Design
+<img src="https://github.com/sianna93/challenge_flutter/blob/master/muszy_app/assets/screenshots/muszy_home.png?raw=true" width="49%" height="auto"/>
+<img src="https://github.com/sianna93/challenge_flutter/blob/master/muszy_app/assets/screenshots/muszy_music_player.png?raw=true" width="49%" height="auto"/>

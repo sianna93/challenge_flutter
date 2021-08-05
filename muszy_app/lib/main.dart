@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muszy_app/pages/home-page.dart';
+import 'package:muszy_app/pages/init-page.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,12 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Muszy',
       theme: ThemeData(
 
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(title: 'Flutter Demo Home Page'),
+      home: InitPage(),
     );
   }
 }
