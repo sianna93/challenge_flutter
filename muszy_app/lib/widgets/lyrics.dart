@@ -104,13 +104,10 @@ class LyricItemState extends State<LyricItem> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (WidgetsBinding.instance != null) {
       WidgetsBinding.instance!.addPostFrameCallback((_) => { getSizeContent()});
     }
-
-
   }
 
   getSizeContent() async{
@@ -122,10 +119,6 @@ class LyricItemState extends State<LyricItem> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
-    // ScreenUtil
-
     return Container(
       key: itemKey,
       padding: EdgeInsets.symmetric(vertical: 6.0),
@@ -133,7 +126,7 @@ class LyricItemState extends State<LyricItem> {
           textAlign: TextAlign.center,
           text: TextSpan(
             text:   _getFirstWord(4),
-            style: TextStyle(//context.size!.height
+            style: TextStyle(
                 color:  isFirstLine(heigthContent) ? AppTheme.kBackground_blue3: _getColorInactive(heigthContent)  ,
                 fontSize: 15.0, fontWeight: FontWeight.bold),
             children:  <TextSpan>[
