@@ -97,7 +97,7 @@ class FormSignupState extends State<FormSignup>{
                               UserModel userModel = new UserModel(
                                 name: _nameController.text,
                                 lastname: _lastNameController.text,
-                                adress: _addressController.text,
+                                address: _addressController.text,
                                 email: _emailController.text,
                                 password: _passwordController.text,
                               );

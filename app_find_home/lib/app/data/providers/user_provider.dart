@@ -18,4 +18,29 @@ class UserProvider {
 
     return response.data["message"];
   }
+
+  Future<UserModel> getInformation({
+    required String token,
+    required int idUser
+  })async {
+    final _dio = Dio();
+    final response = await _dio.get(
+        _basePath + "/api/user/information/${idUser}",
+        // queryParameters: {"id": idUser},
+        options: Options(headers: {"auth": token})
+    );
+
+    if (response.data["information"] != null) {
+      print(response.data["information"]);
+      var userModeList = (response.data["information"] as List)
+          .map((item) => UserModel.fromJson(item))
+          .toList();
+
+      return userModeList[0];
+    } else {
+      return new UserModel(id: 0, name: "Invitado", email: "invitado@gmai.com");
+    }
+
+
+  }
 }

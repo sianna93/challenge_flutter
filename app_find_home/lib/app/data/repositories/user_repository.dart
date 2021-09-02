@@ -7,6 +7,11 @@ class UserRepository{
   final _apiProvider = Get.find<UserProvider>();
 
   Future<String> insertUser({
-    @required UserModel? userModel
+    required UserModel? userModel
   }) => _apiProvider.insertUser(userModel: userModel);
+
+  Future<UserModel> getInformation({
+    required String token,
+    required int idUser
+  }) => _apiProvider.getInformation(token: token, idUser: idUser);
 }

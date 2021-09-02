@@ -20,7 +20,7 @@ class Category extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  // _.selectedIndex(index);
+                  _.selectedIndex(index);
                 },
                 child: ItemCategory(
                   category: categories[index],
@@ -37,8 +37,8 @@ class Category extends StatelessWidget {
 
 class ItemCategory extends StatelessWidget {
   ItemCategory({
-    @required this.category,
-    @required this.index,
+    required this.category,
+    required this.index,
   });
 
   final CategoryModel? category;
@@ -46,9 +46,9 @@ class ItemCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (_) => Obx(
-            () {
-          bool isSelected = index == /*_.isSelectedIndex.value ? true :*/ false;
+      builder: (_) =>  Obx(
+        () {
+          bool isSelected = index == _.indexCategorySelected.value ? true : false;
           return AnimatedContainer(
             duration: Duration(milliseconds: 500),
             width: 85.0,
@@ -57,9 +57,9 @@ class ItemCategory extends StatelessWidget {
               bottom: isSelected ? 0 : 20.0,
             ),
             decoration: BoxDecoration(
-              /*color: index == _.isSelectedIndex.value
+              color: index == _.indexCategorySelected.value
                   ? AppTheme.cyan
-                  : Colors.white,*/
+                  : Colors.white,
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: Column(

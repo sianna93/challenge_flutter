@@ -40,36 +40,38 @@ class _SliverAppBar extends StatelessWidget {
               foregroundImage: NetworkImage(
                   "https://i.pinimg.com/474x/98/6d/69/986d69105df94498ea96e53a7495de19.jpg"),
             ),
-            RichText(
-                text: TextSpan(
-                  children: [
-                    WidgetSpan(
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: SvgPicture.asset(
-                          "assets/icons/location.svg",
-                          width: 12.0,
+            Obx(
+                () =>  RichText(
+                  text: TextSpan(
+                    children: [
+                      WidgetSpan(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 10.0),
+                          child: SvgPicture.asset(
+                            "assets/icons/location.svg",
+                            width: 12.0,
+                          ),
                         ),
+                        alignment: PlaceholderAlignment.middle,
                       ),
-                      alignment: PlaceholderAlignment.middle,
-                    ),
-                    TextSpan(
-                      //text: _.adress.value,
-                      text: "ADDRESS",// "${_.adress}",
-                      style: Theme.of(context).textTheme.button?.copyWith(
+                      TextSpan(
+                        text: "${_.address.value}",
+                        style: Theme.of(context).textTheme.button?.copyWith(
+                            color: AppTheme.blueDark,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      WidgetSpan(
+                        child: Icon(
+                          Icons.keyboard_arrow_down_outlined,
                           color: AppTheme.blueDark,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    WidgetSpan(
-                      child: Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        color: AppTheme.blueDark,
+                        ),
+                        alignment: PlaceholderAlignment.middle,
                       ),
-                      alignment: PlaceholderAlignment.middle,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
             ),
+
             RichText(
               text: TextSpan(
                 children: [
@@ -107,15 +109,15 @@ class _WelcomeUser extends StatelessWidget {
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          /*Obx(
-                () => */Text(
-              "Hi ....",//"Hi ${_.name}",
+          Obx(
+                () => Text(
+              "Hi ${_.name.value}",
               style: Theme.of(context)
                   .textTheme
                   .headline6!
                   .copyWith(color: Colors.black38, fontWeight: FontWeight.w200),
             ),
-          //),
+          ),
           Text(
             "Start Looking for u house",
             style: Theme.of(context).textTheme.headline6!.copyWith(

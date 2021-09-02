@@ -1,16 +1,34 @@
 import 'package:app_find_home/app/core/theme/app_theme.dart';
+import 'package:app_find_home/app/data/model/house_model.dart';
 import 'package:app_find_home/app/data/model/request_token.dart';
+import 'package:app_find_home/app/data/model/user_model.dart';
+import 'package:app_find_home/app/data/repositories/house_repository.dart';
 import 'package:app_find_home/app/data/repositories/local/storage_repository.dart';
+import 'package:app_find_home/app/data/repositories/user_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController{
   final _storageRepository = Get.find<StorageRepository>();
+  final _userRepository = Get.find<UserRepository>();
+  final _houseRepository = Get.find<HouseRepository>();
+
   late RequestToken _requestToken;
 
+  UserModel _userSession = UserModel();
+  UserModel get userModel => _userSession;
+
+
+  // Variables reactivas
+  RxInt indexCategorySelected = RxInt(0);
   RxString address = RxString("");//"".obs
   RxString name =  RxString("");//"".obs
+
+  RxList<HouseModel> _houses =  RxList([]);
+  List<HouseModel> get houses => _houses;
+
+
   @override
   void onInit() {
     _loadStorage();
@@ -29,17 +47,17 @@ class HomeController extends GetxController{
   _loadStorage() async {
 
     try{
-      _requestToken = await _storageRepository.getSession();
-       /*_userModel =  await _userRepository.getInformation(
-        toke: _requestToken.requestToken ?? "",
-        userID: _requestToken.idUser ?? 0,
+       _requestToken = await _storageRepository.getSession();
+       _userSession =  await _userRepository.getInformation(
+        token: _requestToken.requestToken ?? "",
+        idUser: _requestToken.idUser ?? 0,
       );
 
-      address.value = _userModel[0].address ?? "";
-      name.value = _userModel[0].name ?? "";
+      address.value = _userSession.address ?? "";
+      name.value = _userSession.name ?? "";
 
       print(address.value);
-      print(name.value);*/
+      print(name.value);
 
     } on DioError catch(e) {
       Get.snackbar(
@@ -53,15 +71,19 @@ class HomeController extends GetxController{
     }
   }
 
+  selectedIndex(int index) {
+    indexCategorySelected.value = index;
+  }
 
 
 
 
-  _loadHouses() {
+  _loadHouses() async {
 
-   /* try{
-      _houses.value = _houseRepository.getHouses(
-          token: _requestToken.requestToken
+    try{
+      _requestToken = await _storageRepository.getSession();
+      _houses.value = await _houseRepository.getHouses(
+          token: _requestToken.requestToken ?? ""
       );
 
       print(_houses.length);
@@ -74,7 +96,7 @@ class HomeController extends GetxController{
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: AppTheme.background
       );
-    }*/
+    }
   }
 
 }

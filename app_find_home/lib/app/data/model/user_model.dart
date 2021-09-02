@@ -3,7 +3,7 @@ class UserModel{
     this.id,
     this.name,
     this.lastname,
-    this.adress,
+    this.address,
     this.email,
     this.password,
   });
@@ -11,7 +11,7 @@ class UserModel{
   int? id;
   String? name;
   String? lastname;
-  String? adress;
+  String? address;
   String? email;
   String? password;
 
@@ -20,7 +20,7 @@ class UserModel{
     name: json["name"],
     lastname: json["lastname"],
     //adress: json["adress"],
-    adress: json["address"],
+    address: json["address"],
     email: json["email"],
     password: json["password"],
   );
@@ -29,7 +29,7 @@ class UserModel{
     //"idUser": id,
     "name": name,
     "lastname": lastname,
-    "adress": adress,
+    "address": address,
     "email": email,
     "password": password,
   };

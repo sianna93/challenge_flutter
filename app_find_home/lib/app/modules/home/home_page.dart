@@ -1,5 +1,8 @@
 import 'package:app_find_home/app/core/theme/app_theme.dart';
+import 'package:app_find_home/app/global_widgets/button_navigator.dart';
+import 'package:app_find_home/app/modules/home/widgets/category.dart';
 import 'package:app_find_home/app/modules/home/widgets/header_home.dart';
+import 'package:app_find_home/app/modules/home/widgets/houses.dart';
 import 'package:app_find_home/app/modules/home/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,12 +28,12 @@ class HomePage extends StatelessWidget{
                   slivers: [
                     HeaderHome(),
                     Search(),
-                   //  Category(),
-                    // Houses(),
+                    Category(),
+                    Houses(),
                   ],
                 ),
               ),
-             /* ButtonNavigator()*/
+              ButtonNavigator()
             ],
           ),
         ),
