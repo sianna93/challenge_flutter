@@ -5,8 +5,6 @@ import 'package:app_find_home/app/data/model/request_token.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class StorageProvider {
-
-
 // Create storage
   final FlutterSecureStorage _storage = new FlutterSecureStorage();
 

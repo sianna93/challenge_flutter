@@ -5,6 +5,7 @@ import 'package:app_find_home/app/data/model/user_model.dart';
 import 'package:app_find_home/app/data/repositories/house_repository.dart';
 import 'package:app_find_home/app/data/repositories/local/storage_repository.dart';
 import 'package:app_find_home/app/data/repositories/user_repository.dart';
+import 'package:app_find_home/app/routes/routes.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,6 +49,7 @@ class HomeController extends GetxController{
 
     try{
        _requestToken = await _storageRepository.getSession();
+
        _userSession =  await _userRepository.getInformation(
         token: _requestToken.requestToken ?? "",
         idUser: _requestToken.idUser ?? 0,
@@ -56,18 +58,19 @@ class HomeController extends GetxController{
       address.value = _userSession.address ?? "";
       name.value = _userSession.name ?? "";
 
-      print(address.value);
-      print(name.value);
-
     } on DioError catch(e) {
-      Get.snackbar(
-          "Message",
-          e.response?.data("message"),
-          colorText: Colors.white,
-          duration: Duration(seconds: 5),
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppTheme.cyan
-      );
+      if(e.response!.statusCode == 401){
+        Get.offNamed(AppRoutes.LOGIN);
+      } else {
+        Get.snackbar(
+            "Message",
+            e.response?.data("message"),
+            colorText: Colors.white,
+            duration: Duration(seconds: 5),
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: AppTheme.cyan
+        );
+      }
     }
   }
 
@@ -75,7 +78,21 @@ class HomeController extends GetxController{
     indexCategorySelected.value = index;
   }
 
-
+  logout() async {
+    try {
+      await _storageRepository.deleteSession();
+      Get.offNamed(AppRoutes.LOGIN);
+    } catch(e) {
+      Get.snackbar(
+          "Message",
+          e.toString(),
+          colorText: Colors.white,
+          duration: Duration(seconds: 5),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppTheme.cyan
+      );
+    }
+  }
 
 
   _loadHouses() async {

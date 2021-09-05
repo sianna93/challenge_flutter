@@ -4,8 +4,6 @@ import 'package:app_find_home/app/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app/modules/splash/splash_page.dart';
-
 void main() {
   DependencyInjection.load();
   runApp(MyApp());

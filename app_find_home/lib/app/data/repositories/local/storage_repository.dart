@@ -7,4 +7,5 @@ class StorageRepository{
 
   Future<void> setSession({required RequestToken requestToken}) => _storageProvider.setSession(requestToken: requestToken);
   Future<RequestToken> getSession() => _storageProvider.getSession();
+  Future<void> deleteSession() => _storageProvider.deleteSession();
 }

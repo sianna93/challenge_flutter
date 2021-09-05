@@ -85,14 +85,32 @@ class _SliverAppBar extends StatelessWidget {
                   WidgetSpan(
                     child: Padding(
                       padding: EdgeInsets.only(left: 15.0),
-                      child: SvgPicture.asset(
-                        "assets/icons/setting.svg",
-                        width: 18.0,
+                      child:  PopupMenuButton<int>(
+                        icon: SvgPicture.asset(
+                          "assets/icons/setting.svg",
+                          width: 18.0,
+                        ),
+                        tooltip: 'Configuration',
+                        onSelected: (value) {
+                          //Do something with selected parent value
+                          if (value == 1) {
+                            print('Se debe desloguear');
+                            _.logout();
+                          }
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return <PopupMenuEntry<int>>[
+                            PopupMenuItem<int>(
+                              value: 1,
+                              child: Text('Logout'),
+                            ),
+                          ];
+                        },
                       ),
                     ),
                     alignment: PlaceholderAlignment.middle,
                   ),
-                ],
+                ]
               ),
             ),
           ],

@@ -36,6 +36,8 @@ dependencies:
   flutter_secure_storage: ^4.2.1
   card_swiper: ^1.0.4
 
+  #screen-util para que se adapte a menor de 4.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
