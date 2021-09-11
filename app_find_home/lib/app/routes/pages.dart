@@ -4,6 +4,8 @@ import 'package:app_find_home/app/modules/home/home_binding.dart';
 import 'package:app_find_home/app/modules/home/home_page.dart';
 import 'package:app_find_home/app/modules/login/login_binding.dart';
 import 'package:app_find_home/app/modules/login/login_page.dart';
+import 'package:app_find_home/app/modules/profile/profile_binding.dart';
+import 'package:app_find_home/app/modules/profile/profile_page.dart';
 import 'package:app_find_home/app/modules/signup/signup_binding.dart';
 import 'package:app_find_home/app/modules/signup/signup_page.dart';
 import 'package:app_find_home/app/modules/splash/splash_binding.dart';
@@ -39,6 +41,11 @@ class AppPages {
         name: AppRoutes.DETAIL,
         page: () => DetailPage(),
         binding: DetailBinding()
+    ),
+    GetPage(
+        name: AppRoutes.PROFILE,
+        page: () => ProfilePage(),
+        binding: ProfileBinding()
     ),
   ];
 }

@@ -30,6 +30,7 @@ class UserModel{
     "name": name,
     "lastname": lastname,
     "address": address,
+    "adress": address,
     "email": email,
     "password": password,
   };

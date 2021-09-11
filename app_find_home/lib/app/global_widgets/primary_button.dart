@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 class PrimaryButton extends StatelessWidget{
 
   PrimaryButton({
-    required this.text,
+    this.text,
     required this.onPressed,
-    this.size
+    this.size,
+    this.textWidget
   });
-  final String text;
+  final String? text;
   final void Function() onPressed;
   final Size? size;
+  final Widget? textWidget;
 
 
   @override
@@ -18,7 +20,7 @@ class PrimaryButton extends StatelessWidget{
     // TODO: implement build
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(text),
+      child: textWidget != null ? textWidget : Text(text ?? ""),
 
       style: ElevatedButton.styleFrom(
         minimumSize: size != null ? size : Size(double.infinity, 40.0),

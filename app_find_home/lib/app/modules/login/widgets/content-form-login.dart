@@ -104,7 +104,7 @@ class ContentFormLoginState extends State<ContentFormLogin>{
                                   onTap: (){
                                     Get.offNamed(AppRoutes.SINGUP );
                                   },
-                                  child: Text("create new account",
+                                  child: Text("Create new account",
                                       style: TextStyle(
                                           color: AppTheme.primaryDark,
                                           fontSize: 16.0,

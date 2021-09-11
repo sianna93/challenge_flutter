@@ -9,7 +9,7 @@ class HouseProvider{
   })async {
     final _dio = Dio();
     final response = await _dio.get(
-        BASEPATH + "/api/house/houses/1/6",
+        BASEPATH + "/api/house/houses/1/30",
         options: Options(headers: {"auth": token} )
     );
 

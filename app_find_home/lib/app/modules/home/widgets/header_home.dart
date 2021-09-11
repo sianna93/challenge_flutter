@@ -1,4 +1,5 @@
 import 'package:app_find_home/app/core/theme/app_theme.dart';
+import 'package:app_find_home/app/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -36,10 +37,16 @@ class _SliverAppBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
-              foregroundImage: NetworkImage(
-                  "https://i.pinimg.com/474x/98/6d/69/986d69105df94498ea96e53a7495de19.jpg"),
-            ),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(AppRoutes.PROFILE, arguments: _.userModel);
+              },
+              child: CircleAvatar(
+                foregroundImage: NetworkImage(
+                    "https://i.pinimg.com/474x/98/6d/69/986d69105df94498ea96e53a7495de19.jpg"),
+              )
+            )
+            ,
             Obx(
                 () =>  RichText(
                   text: TextSpan(

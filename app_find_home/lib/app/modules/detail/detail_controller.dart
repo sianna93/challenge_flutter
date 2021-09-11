@@ -15,6 +15,8 @@ class DetailController extends GetxController{
   late RequestToken _requestToken;
   HouseModel _houseModel = HouseModel();
   HouseModel get houseModel => _houseModel;
+
+  RxBool loadingReserved = RxBool(false);
   @override
   void onInit() {
     this._houseModel = Get.arguments as HouseModel;
@@ -27,6 +29,7 @@ class DetailController extends GetxController{
   }
 
   void register({required ReservationModel reservationModel}) async {
+    loadingReserved.value = true;
     try {
       _requestToken = await _storageRepository.getSession();
       reservationModel.idUser = _requestToken.idUser;
@@ -35,6 +38,7 @@ class DetailController extends GetxController{
           reservationModel: reservationModel
       );
 
+      loadingReserved.value = false;
       Get.snackbar(
           "Message",
           response,
@@ -47,6 +51,7 @@ class DetailController extends GetxController{
       print (response);
 
     } on DioError catch(e) {
+      loadingReserved.value = false;
       Get.snackbar(
           "Message",
           e.response?.data("message"),

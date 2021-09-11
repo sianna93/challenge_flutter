@@ -114,7 +114,7 @@ class FooterState extends State<Footer>{
                             ),
                           ),
                           Text(
-                            "Reservar",
+                            "Reservation",
                             style: Theme
                                 .of(context)
                                 .textTheme
@@ -139,17 +139,27 @@ class FooterState extends State<Footer>{
                             controller: _priceController,
                           ),
                           SizedBox(height: 30.0,),
-                          PrimaryButton(
-                            text: "Save",
-                            onPressed: () {
-                              _.register(reservationModel: ReservationModel(
-                                idHouse: widget.house.idHouse,
-                                date: DateTime.parse(_dateController.text),
-                                price: double.parse(_priceController.text)
-                                // widget.house.idHouse
-                              ));
-                            },
+                          Obx(
+                              () {
+                                return PrimaryButton(
+                                  text: _.loadingReserved.value ? "Loading..." : "Save" ,
+                                  onPressed: () {
+                                    if (!_.loadingReserved.value) {
+                                      _.register(
+                                          reservationModel: ReservationModel(
+                                              idHouse: widget.house.idHouse,
+                                              date: DateTime.parse(
+                                                  _dateController.text),
+                                              price: double.parse(
+                                                  _priceController.text)
+                                            // widget.house.idHouse
+                                          ));
+                                    }
+                                  },
+                                );
+                              }
                           ),
+
                         ],
                       ),
                     )

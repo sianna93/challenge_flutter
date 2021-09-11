@@ -35,6 +35,7 @@ dependencies:
   shimmer: ^2.0.0
   flutter_secure_storage: ^4.2.1
   card_swiper: ^1.0.4
+  percent_indicator: ^3.0.1
 
   #screen-util para que se adapte a menor de 4.5
 

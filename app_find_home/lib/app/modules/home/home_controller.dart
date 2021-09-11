@@ -99,12 +99,14 @@ class HomeController extends GetxController{
 
     try{
       _requestToken = await _storageRepository.getSession();
+      print(_requestToken.requestToken ?? "NO REQUEST TOKEN");
       _houses.value = await _houseRepository.getHouses(
           token: _requestToken.requestToken ?? ""
       );
 
       print(_houses.length);
     } on DioError catch(e) {
+      print(e);
       Get.snackbar(
           "Message",
           e.response?.data("message"),
